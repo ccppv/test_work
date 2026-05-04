@@ -5,6 +5,7 @@ Revises:
 Create Date: 2026-05-03
 
 """
+
 from typing import Sequence, Union
 
 import sqlalchemy as sa
@@ -36,9 +37,7 @@ def upgrade() -> None:
         ),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(
-        "ix_metric_entries_month_order", "metric_entries", ["month_order"]
-    )
+    op.create_index("ix_metric_entries_month_order", "metric_entries", ["month_order"])
 
     op.create_table(
         "insight_logs",
@@ -59,9 +58,7 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_index("ix_insight_logs_provider", "insight_logs", ["provider"])
-    op.create_index(
-        "ix_insight_logs_created_at", "insight_logs", ["created_at"]
-    )
+    op.create_index("ix_insight_logs_created_at", "insight_logs", ["created_at"])
 
 
 def downgrade() -> None:

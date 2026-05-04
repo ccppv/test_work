@@ -1,7 +1,7 @@
 """Тесты API /api/v1/insight."""
+
 from unittest.mock import AsyncMock, patch
 
-import pytest
 
 from app.models.insight_log import InsightLog
 from sqlalchemy import select

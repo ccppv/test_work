@@ -17,25 +17,29 @@ export default function KPICard({
 }: KPICardProps) {
   const isGood = isGoodWhenUp ? delta > 0 : delta < 0;
   const isNeutral = delta === 0;
-  const color = isNeutral
-    ? 'text-gray-400'
+
+  const deltaColor = isNeutral
+    ? 'text-zinc-500'
     : isGood
     ? 'text-emerald-400'
-    : 'text-red-400';
-  const bgColor = isNeutral
-    ? ''
+    : 'text-rose-400';
+
+  const deltaBg = isNeutral
+    ? 'bg-zinc-800'
     : isGood
-    ? 'border-emerald-800/30'
-    : 'border-red-800/30';
-  const arrow = delta > 0 ? '↑' : delta < 0 ? '↓' : '→';
+    ? 'bg-emerald-950/60'
+    : 'bg-rose-950/60';
+
+  const arrow = delta > 0 ? '↑' : delta < 0 ? '↓' : '—';
 
   return (
-    <div className={`bg-gray-800 rounded-xl p-5 border ${bgColor || 'border-gray-700'} flex flex-col gap-1`}>
-      <div className="text-gray-400 text-sm font-medium">{title}</div>
-      <div className="text-2xl font-bold text-white">{value}</div>
-      <div className={`text-sm font-semibold ${color}`}>
-        {arrow} {Math.abs(delta).toFixed(1)}{deltaLabel}
-        <span className="text-gray-500 font-normal ml-1">за период</span>
+    <div className="bg-zinc-900 rounded-2xl p-5 border border-zinc-800 flex flex-col gap-3 hover:border-zinc-700 transition-colors">
+      <p className="text-zinc-500 text-xs font-medium uppercase tracking-wider">{title}</p>
+      <p className="text-3xl font-bold text-white leading-none tracking-tight">{value}</p>
+      <div className={`inline-flex items-center gap-1.5 self-start rounded-full px-2.5 py-1 text-xs font-semibold ${deltaBg} ${deltaColor}`}>
+        <span>{arrow}</span>
+        <span>{Math.abs(delta).toFixed(1)}{deltaLabel}</span>
+        <span className="text-zinc-600 font-normal">за период</span>
       </div>
     </div>
   );

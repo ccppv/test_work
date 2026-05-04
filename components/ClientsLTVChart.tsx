@@ -25,37 +25,37 @@ export default function ClientsLTVChart({ data }: Props) {
   }));
 
   return (
-    <div className="bg-gray-800 rounded-xl p-5 border border-gray-700">
-      <h3 className="text-white font-semibold mb-4">Новые клиенты и LTV</h3>
+    <div className="bg-zinc-900 rounded-2xl p-5 border border-zinc-800">
+      <h3 className="text-white font-semibold mb-4 text-base">Новые клиенты и LTV</h3>
       <ResponsiveContainer width="100%" height={220}>
         <ComposedChart data={chartData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-          <XAxis dataKey="month" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
+          <XAxis dataKey="month" tick={{ fill: '#71717a', fontSize: 11 }} />
           <YAxis
             yAxisId="left"
-            tick={{ fill: '#9CA3AF', fontSize: 11 }}
+            tick={{ fill: '#71717a', fontSize: 11 }}
             width={30}
           />
           <YAxis
             yAxisId="right"
             orientation="right"
-            tick={{ fill: '#9CA3AF', fontSize: 11 }}
+            tick={{ fill: '#71717a', fontSize: 11 }}
             tickFormatter={(v) => `${v}k`}
             width={35}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: '#1F2937',
-              border: '1px solid #374151',
-              borderRadius: 8,
+              backgroundColor: '#18181b',
+              border: '1px solid #3f3f46',
+              borderRadius: 10,
             }}
-            labelStyle={{ color: '#F9FAFB' }}
+            labelStyle={{ color: '#fafafa' }}
             formatter={(val, name) => {
               if (name === 'LTV (тыс. ₽)') return [`${val}k ₽`, name as string];
               return [val as number, name as string];
             }}
           />
-          <Legend wrapperStyle={{ color: '#9CA3AF', fontSize: 12 }} />
+          <Legend wrapperStyle={{ color: '#71717a', fontSize: 12 }} />
           <Bar
             yAxisId="left"
             dataKey="newClients"

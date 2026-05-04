@@ -1,10 +1,9 @@
 """Unit-тесты сервисного слоя (без HTTP)."""
+
 from unittest.mock import AsyncMock, patch
 
-import pytest
 
 from app.models.insight_log import InsightLog
-from app.models.metric import MetricEntry
 from app.schemas.insight import InsightRequest
 from app.services.insight_service import _build_table, generate_insight
 from app.services.metrics_service import get_all_metrics, get_metrics_by_period
@@ -33,7 +32,9 @@ class TestMetricsService:
         result = await get_metrics_by_period(db_session, 0, 11)
         assert len(result) == 12
 
-    async def test_get_metrics_by_period_first_quarter(self, db_session, sample_metrics):
+    async def test_get_metrics_by_period_first_quarter(
+        self, db_session, sample_metrics
+    ):
         """Период [0, 2] → 3 строки (Январь–Март)."""
         result = await get_metrics_by_period(db_session, 0, 2)
         assert len(result) == 3
@@ -97,8 +98,7 @@ class TestGenerateInsight:
         log_result = await db_session.execute(select(InsightLog))
         logs = log_result.scalars().all()
         assert any(
-            log.provider == "claude" and log.response_text == mock_text
-            for log in logs
+            log.provider == "claude" and log.response_text == mock_text for log in logs
         )
 
     async def test_generate_insight_gemini(self, db_session, sample_metrics):

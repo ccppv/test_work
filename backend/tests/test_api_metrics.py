@@ -1,4 +1,5 @@
 """Тесты API /api/v1/metrics."""
+
 import pytest
 
 
@@ -47,8 +48,14 @@ class TestGetMetrics:
         response = await client.get("/api/v1/metrics")
         row = response.json()["data"][0]
         expected_fields = {
-            "month", "month_order", "revenue", "new_clients",
-            "ltv", "churn", "margin", "cac",
+            "month",
+            "month_order",
+            "revenue",
+            "new_clients",
+            "ltv",
+            "churn",
+            "margin",
+            "cac",
         }
         assert expected_fields.issubset(row.keys())
 

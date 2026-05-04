@@ -1,7 +1,7 @@
 'use client';
 
 import { MetricRow } from '@/lib/types';
-import { AlertTriangle, TrendingDown, CheckCircle } from 'lucide-react';
+import { TrendingDown } from 'lucide-react';
 
 interface Props {
   data: MetricRow[];
@@ -72,41 +72,37 @@ export default function AnomalyBadge({ data }: Props) {
   const anomalies = detectAnomalies(data);
 
   return (
-    <div className="bg-gray-800 rounded-xl p-5 border border-gray-700">
-      <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+    <div className="bg-zinc-900 rounded-2xl p-5 border border-zinc-800">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-white font-semibold text-base">Отклонения</h3>
         {anomalies.length > 0 ? (
-          <>
-            <AlertTriangle size={18} className="text-amber-400" />
-            Аномалии за период
-            <span className="ml-1 bg-amber-500/20 text-amber-400 text-xs px-2 py-0.5 rounded-full font-semibold">
-              {anomalies.length}
-            </span>
-          </>
+          <span className="bg-amber-500/15 text-amber-400 text-xs font-semibold px-2.5 py-1 rounded-full border border-amber-500/20">
+            {anomalies.length} найдено
+          </span>
         ) : (
-          <>
-            <CheckCircle size={18} className="text-emerald-400" />
-            Аномалий не обнаружено
-          </>
+          <span className="bg-emerald-500/10 text-emerald-400 text-xs font-medium px-2.5 py-1 rounded-full border border-emerald-500/20">
+            в норме
+          </span>
         )}
-      </h3>
+      </div>
 
       {anomalies.length === 0 && (
-        <p className="text-gray-500 text-sm">
+        <p className="text-zinc-500 text-sm">
           Все метрики в пределах нормы для выбранного периода.
         </p>
       )}
 
-      <ul className="space-y-2 max-h-[168px] overflow-y-auto pr-1">
+      <ul className="space-y-1.5 max-h-[170px] overflow-y-auto pr-1">
         {anomalies.map((a, i) => (
           <li
             key={i}
-            className={`text-sm flex items-start gap-2 px-3 py-2 rounded-lg ${
+            className={`text-sm flex items-start gap-2 px-3 py-2 rounded-xl ${
               a.type === 'danger'
-                ? 'bg-red-950/40 text-red-300 border border-red-800/40'
+                ? 'bg-rose-950/40 text-rose-300 border border-rose-800/40'
                 : 'bg-amber-950/40 text-amber-300 border border-amber-800/40'
             }`}
           >
-            <TrendingDown size={14} className="mt-0.5 shrink-0" />
+            <TrendingDown size={13} className="mt-0.5 shrink-0 opacity-70" />
             {a.message}
           </li>
         ))}

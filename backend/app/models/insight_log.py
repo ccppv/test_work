@@ -12,9 +12,7 @@ class InsightLog(Base):
 
     __tablename__ = "insight_logs"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        Uuid, primary_key=True, default=uuid.uuid4
-    )
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     provider: Mapped[str] = mapped_column(String(20), nullable=False)
     model_name: Mapped[str] = mapped_column(String(50), nullable=False)
     period_start: Mapped[int] = mapped_column(SmallInteger, nullable=False)

@@ -70,37 +70,37 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-        <div className="text-gray-400 text-lg animate-pulse">Загрузка данных…</div>
+      <div className="min-h-screen bg-[#09090b] flex items-center justify-center">
+        <div className="text-zinc-500 text-base animate-pulse">Загрузка данных…</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
-        <div className="text-red-400 text-lg">{error}</div>
+      <div className="min-h-screen bg-[#09090b] flex items-center justify-center">
+        <div className="text-rose-400 text-base">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-      <div className="max-w-7xl mx-auto px-4 py-8 space-y-6">
+    <div className="min-h-screen bg-[#09090b] text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-6">
 
         {/* Header */}
-        <div>
-          <h1 className="text-2xl font-bold text-white">Бизнес-дашборд</h1>
-          <p className="text-gray-400 text-sm mt-1">
-            Ключевые метрики за 12 месяцев · данные из CSV
+        <div className="pb-2 border-b border-zinc-800">
+          <h1 className="text-xl font-semibold text-white tracking-tight">Бизнес-дашборд</h1>
+          <p className="text-zinc-500 text-sm mt-0.5">
+            Ключевые метрики за 12 месяцев
           </p>
         </div>
 
         {/* Period filter */}
-        <div className="bg-gray-800 rounded-xl p-4 border border-gray-700">
+        <div className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-gray-400 text-sm font-medium shrink-0">Период:</span>
-            <div className="flex gap-1.5 flex-wrap">
+            <span className="text-zinc-500 text-xs font-medium uppercase tracking-wider shrink-0">Период</span>
+            <div className="flex gap-1 flex-wrap">
               {MONTHS_SHORT.map((m, i) => {
                 const active = i >= period.start && i <= period.end;
                 const isEdge = i === period.start || i === period.end;
@@ -108,12 +108,12 @@ export default function Home() {
                   <button
                     key={i}
                     onClick={() => toggleMonth(i)}
-                    className={`px-2.5 py-1 rounded text-xs font-medium transition-colors ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
                       isEdge
                         ? 'bg-indigo-600 text-white'
                         : active
-                        ? 'bg-indigo-900/60 text-indigo-300'
-                        : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
+                        ? 'bg-indigo-950/70 text-indigo-300'
+                        : 'bg-zinc-800 text-zinc-500 hover:bg-zinc-700 hover:text-zinc-300'
                     }`}
                   >
                     {m}
@@ -123,9 +123,9 @@ export default function Home() {
             </div>
             <button
               onClick={() => setPeriod({ start: 0, end: 11 })}
-              className="ml-auto text-xs text-gray-400 hover:text-white underline shrink-0"
+              className="ml-auto text-xs text-zinc-500 hover:text-zinc-300 transition-colors shrink-0"
             >
-              Весь год
+              Сбросить
             </button>
           </div>
         </div>

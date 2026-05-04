@@ -4,6 +4,7 @@
     cd backend
     python -m scripts.seed
 """
+
 import asyncio
 import csv
 import sys
@@ -16,7 +17,6 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.core.config import settings  # noqa: E402
-from app.db.base import Base  # noqa: E402
 from app.models.metric import MetricEntry  # noqa: E402
 
 # Порядок месяцев (1-based)

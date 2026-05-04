@@ -5,9 +5,7 @@ from app.models.metric import MetricEntry
 
 
 async def get_all_metrics(db: AsyncSession) -> list[MetricEntry]:
-    result = await db.execute(
-        select(MetricEntry).order_by(MetricEntry.month_order)
-    )
+    result = await db.execute(select(MetricEntry).order_by(MetricEntry.month_order))
     return list(result.scalars().all())
 
 

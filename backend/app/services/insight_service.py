@@ -1,4 +1,5 @@
 import asyncio
+import sys
 import time
 
 from anthropic import AsyncAnthropic
@@ -88,13 +89,14 @@ async def generate_insight(
     period_label = f"{metrics[0].month} – {metrics[-1].month}"
     user_message = f"Данные за период ({period_label}):\n{table}"
 
-    # Ищем функцию через globals() в рантайме — чтобы unittest.mock.patch работал
-    import sys as _sys
-    _mod = _sys.modules[__name__]
-    call_fn = getattr(_mod, f"_call_{request.provider}")
     model_name = _PROVIDER_MODELS[request.provider]
 
     start = time.monotonic()
+    # Резолвим функцию через атрибут модуля в рантайме — чтобы unittest.mock.patch работал.
+    # Если использовать словарь {provider: func} на уровне модуля, patch заменит атрибут,
+    # но словарь будет держать старую ссылку. getattr(sys.modules[__name__], ...) всегда
+    # читает актуальный атрибут.
+    call_fn = getattr(sys.modules[__name__], f"_call_{request.provider}")
     text = await call_fn(user_message)
     latency_ms = int((time.monotonic() - start) * 1000)
 

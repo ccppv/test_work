@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated
+import json
 
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -24,7 +24,6 @@ class Settings(BaseSettings):
     @classmethod
     def parse_cors(cls, v: str | list[str]) -> list[str]:
         if isinstance(v, str):
-            import json
             return json.loads(v)
         return v
 
